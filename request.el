@@ -921,7 +921,8 @@ Currently it is used only for testing.")
              (coding-system-for-write 'utf-8))
          (with-temp-file tempfile
            (setq buffer-file-coding-system 'utf-8)
-           (insert data)))
+           (insert data)
+           (decode-coding-region (point-min) (point-max) 'utf-8)))
        (list "--data-binary" (concat  "@" (request-untrampify-filename tempfile)))))
    (when type (list "--request" type))
    (cl-loop for (k . v) in headers
